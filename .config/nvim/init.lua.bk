@@ -1,0 +1,204 @@
+vim.g.mapleader = " "
+vim.opt.number = true
+vim.opt.relativenumber = false
+vim.opt.undofile = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4 
+vim.opt.shiftwidth = 4
+vim.opt.title = true
+
+vim.cmd('filetype plugin indent on')
+vim.cmd('syntax on')
+
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
+
+require("lazy").setup({
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-tree/nvim-web-devicons", -- optional, but recommended
+		},
+		lazy = false, -- neo-tree will lazily load itself
+        opts = {
+            filesystem = {
+                filtered_items = {
+                    visible = true, 
+                    hide_dotfiles = false, 
+                    hide_gitignored = false, 
+                },
+            },
+        },
+	},
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000, -- load early so colors are available
+      config = function()
+        -- flavour: "latte" | "frappe" | "macchiato" | "mocha"
+        vim.g.catppuccin_flavour = "mocha"
+
+        require("catppuccin").setup({
+          transparent_background = false,
+          integrations = {
+            native_lsp = {
+              enabled = true,
+              underlines = {
+                errors = { "undercurl" },  -- only errors get squiggles
+                warnings = {},
+                hints = {},
+                information = {},
+              },
+            },
+          },
+        })
+
+        vim.cmd.colorscheme("catppuccin")
+
+        -- === Diagnostic underline control ===
+        -- remove underline for non-errors
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {})
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", {})
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", {})
+
+        -- explicit red undercurl for errors (adjust color if you prefer)
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", {
+          undercurl = true,
+          sp = "#F75F5F",
+        })
+
+        vim.diagnostic.config({
+            signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = "E",
+                [vim.diagnostic.severity.WARN]  = "",
+                [vim.diagnostic.severity.INFO]  = "",
+                [vim.diagnostic.severity.HINT]  = "",
+            },
+        },
+    })
+      end,
+    },
+    {
+        "junegunn/fzf.vim",
+        dependencies = { "junegunn/fzf" },
+        -- lazy load on the commands / keypresses below (keeps startup light)
+        -- leave out `lazy = false` so it only loads when needed
+        config = function()
+            -- use ripgrep for file listing and include hidden but ignore .git
+            vim.env.FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+            vim.env.FZF_DEFAULT_OPTS = '--height=40% --layout=reverse --border --info=inline'
+
+            -- optional: sensible preview integration if bat is available
+            if vim.fn.executable("bat") == 1 then
+                vim.g.fzf_preview_window = { 'right:50%', 'ctrl-/,ctrl-/' }
+            end
+        end,
+        keys = {
+            -- kept your previous convenience mappings (lazy-loads plugin)
+            { "<Leader><Leader>", "<Cmd>Files<CR>", desc = "Find files" },
+            { "<Leader>,", "<Cmd>Buffers<CR>", desc = "Find buffers" },
+            { "<Leader>/", "<Cmd>Rg<CR>", desc = "Search project" },
+        },
+    },
+    {
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup()
+		end,
+		keys = {
+			{ "-", "<Cmd>Oil<CR>", desc = "Browse files from here" },
+		},
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter", -- Only load when you enter Insert mode
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		event = "VeryLazy", -- Special lazy.nvim event for things that can load later and are not important for the initial UI
+		config = function()
+			require("Comment").setup()
+		end,
+	},
+	{
+		"VonHeikemen/lsp-zero.nvim",
+		dependencies = {
+		    "neovim/nvim-lspconfig",
+		    "hrsh7th/cmp-nvim-lsp",
+		    "hrsh7th/nvim-cmp",
+		    "L3MON4D3/LuaSnip",
+		},
+		config = function()
+		    local lsp_zero = require('lsp-zero')
+
+		    lsp_zero.on_attach(function(client, bufnr)
+			    lsp_zero.default_keymaps({buffer = bufnr})
+		    end)
+
+            vim.lsp.config.gopls = {}
+            vim.lsp.config.clangd = {}
+            vim.lsp.config.rust_analyzer = {}
+
+            vim.lsp.enable = ({"gopls", "clangd", "rust_analyzer"})
+		end,
+	},
+	{
+		"farmergreg/vim-lastplace",
+		event = "BufReadPost",
+	},
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("flash").setup({
+				modes = {
+					search = {
+						enabled = true,
+					},
+					char = {
+						enabled = false,
+					},
+				},
+			})
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = { "VeryLazy" },
+		config = function()
+			require("ibl").setup()
+		end,
+	},
+	{
+		"NeogitOrg/neogit",
+		cmd = "Neogit", -- Only load when you run the Neogit command
+		config = function()
+			require("neogit").setup()
+		end,
+	},
+})
+
+
+
