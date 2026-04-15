@@ -58,6 +58,10 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # [Experimental] chronyd for time sync 
+  services.timesyncd.enable = false; 
+  services.chrony.enable = true; 
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -138,6 +142,7 @@
     fzf
     ripgrep
     signal-desktop
+    opencode
   ];
 
   hardware.bluetooth = {

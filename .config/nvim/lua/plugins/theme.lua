@@ -32,6 +32,9 @@ return {
   config = function(_, opts)
     require("catppuccin").setup(opts)
     vim.cmd.colorscheme("catppuccin")
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#fab387", bg = "NONE", bold = true })
+    vim.api.nvim_set_hl(0, "VertSplit", { fg = "#fab387", bg = "NONE", bold = true })
+    vim.api.nvim_set_hl(0, "HorizSplit", { fg = "#fab387", bg = "NONE", bold = true })
 
     -- Minimal diagnostic setup: Icons for errors only
     vim.diagnostic.config({

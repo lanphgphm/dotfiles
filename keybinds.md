@@ -9,6 +9,8 @@
 - Search word under cursor: * 
 
 - Go to definition: gd 
+- View definition in split window: gs 
+- Close the split window: Space + q
 - Jump back to location before gd: Ctrl + o 
 - Go to references: gr 
 - Go to implementation: gi 
