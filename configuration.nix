@@ -143,7 +143,12 @@
     ripgrep
     signal-desktop
     opencode
+    # unfree software 
+    slack
+    claude-code
   ];
+
+  nixpkgs.config.allowUnfree = true;
 
   hardware.bluetooth = {
     enable = true; 
