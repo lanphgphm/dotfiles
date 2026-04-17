@@ -13,8 +13,10 @@
 - Close the split window: Space + q
 - Jump back to location before gd: Ctrl + o 
 - Go to references: gr 
-- Go to implementation: gi 
-- Hover documentation: K 
+- Go to implementation: gi
+
+- Hover documentation: Shift + K
+- Hover error detail: Shift + E
 
 - Find file name: Space + /
 - Fulltext search: Space + Space 
