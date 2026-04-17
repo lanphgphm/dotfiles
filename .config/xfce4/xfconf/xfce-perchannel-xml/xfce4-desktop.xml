@@ -24,8 +24,20 @@
       </property>
       <property name="monitoreDP-1" type="empty">
         <property name="workspace0" type="empty">
-          <property name="last-image" type="string" value="/home/lfong/Downloads/photos/me2-modified.jpg"/>
+          <property name="last-image" type="string" value="/home/lfong/Downloads/photos/dog.jpg"/>
           <property name="image-style" type="int" value="5"/>
+          <property name="rgba1" type="array">
+            <value type="double" value="0.86274509803921573"/>
+            <value type="double" value="0.54117647058823526"/>
+            <value type="double" value="0.8666666666666667"/>
+            <value type="double" value="1"/>
+          </property>
+          <property name="backdrop-cycle-enable" type="bool" value="false"/>
+        </property>
+      </property>
+      <property name="monitorDP-1" type="empty">
+        <property name="workspace0" type="empty">
+          <property name="last-image" type="string" value="/home/lfong/Downloads/photos/dog.jpg"/>
         </property>
       </property>
     </property>

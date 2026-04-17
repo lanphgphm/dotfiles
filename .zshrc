@@ -12,3 +12,9 @@ zstyle :compinstall filename '/home/lfong/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+export KNOWLEDGE_VAULT_PATH="$HOME/self/zettelkasten/"
+export PATH="$PATH:$HOME/.cargo/bin"
+alias tosrc="cd $HOME/src/timebeat"
+alias tonotes="cd $HOME/self/zettelkasten/"
+alias tocfg="cd $HOME/self/dotfiles/"
+alias tooss="cd $HOME/oss/"

@@ -143,6 +143,18 @@
     ripgrep
     signal-desktop
     opencode
+
+    # original sin 
+    nodejs 
+
+    # go 
+    go
+    gopls
+    revive
+    gotools
+    delve 
+    mage 
+
     # unfree software 
     slack
     claude-code
