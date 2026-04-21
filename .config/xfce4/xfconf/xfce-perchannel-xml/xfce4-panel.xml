@@ -43,6 +43,7 @@
         <value type="int" value="17"/>
         <value type="int" value="11"/>
         <value type="int" value="20"/>
+        <value type="int" value="21"/>
       </property>
       <property name="mode" type="uint" value="1"/>
       <property name="nrows" type="uint" value="1"/>
@@ -66,6 +67,7 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (69%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (75%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (71%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (97%)"/>
@@ -126,6 +128,11 @@
     <property name="plugin-20" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="17762453461.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-21" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="17767384681.desktop"/>
       </property>
     </property>
   </property>

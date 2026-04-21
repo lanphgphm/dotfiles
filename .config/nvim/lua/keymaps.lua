@@ -10,7 +10,7 @@ map("v", "<", "<gv", { desc = "Indent left" })
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 map("n", "gr", vim.lsp.buf.references, { desc = "List Usages (References)" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+map("n", "K", vim.lsp.buf.hover, { buffer = true, desc = "Hover Documentation" })
 
 -- Temporarily highlight split separator when jumping to definition
 local function goto_definition_split(split_cmd, hl_color)

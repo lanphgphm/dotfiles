@@ -17,8 +17,5 @@ return {
     cmd = { "GoDoc" },
     ft = "go",
     opts = {},
-    keys = {
-      { "K", "<cmd>GoDoc<cr>", desc = "Go Documentation", ft = "go" },
-    },
   },
 }
