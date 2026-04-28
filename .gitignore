@@ -6,7 +6,6 @@
 .config/dconf/
 .config/go/
 .config/mozilla/
-.config/opencode/
 .config/pavucontrol.ini
 .config/pulse/
 .config/xfce4/desktop/
@@ -17,3 +16,5 @@
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-manager.xml
+.config/user-dirs.dirs 
+.config/user-dirs.locale
