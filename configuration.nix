@@ -122,7 +122,31 @@
     };
   };
 
+  # enable filesystem compatibility layer 
+  #programs.nix-ld = {
+  #  enable = true; 
+  #  libraries = with pkgs; [
+  #    stdenv.cc.cc.lib
+  #    zlib
+  #    glib
+  #    libGL
+  #    xorg.libX11
+  #    xorg.libXext
+  #    xorg.libXrender
+  #    xorg.libXtst
+  #    xorg.libXi
+  #    freetype
+  #    fontconfig
+  #    libxcrypt
+  #    ncurses5
+  #    libuuid
+  #  ];
+  #}; 
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    download-buffer-size = 524288000; # 500 MiB
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -143,6 +167,14 @@
     ripgrep
     signal-desktop
     opencode
+    wireshark
+
+    # kubernetes 
+    kubectl 
+    (google-cloud-sdk.withExtraComponents [
+      google-cloud-sdk.components.gke-gcloud-auth-plugin
+    ])
+    k9s
 
     # original sin 
     nodejs 
@@ -158,6 +190,8 @@
     # unfree software 
     slack
     claude-code
+    # a bunch of jetbrains 
+    jetbrains.idea
   ];
 
   nixpkgs.config.allowUnfree = true;

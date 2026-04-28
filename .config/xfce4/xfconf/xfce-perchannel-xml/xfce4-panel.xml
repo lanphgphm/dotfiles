@@ -67,6 +67,10 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (81%)"/>
+        <value type="string" value="wi-fi network connection “minthui” active: minthui (84%)"/>
+        <value type="string" value="wi-fi network connection “minthui” active: minthui (92%)"/>
+        <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (78%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (69%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (75%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (71%)"/>

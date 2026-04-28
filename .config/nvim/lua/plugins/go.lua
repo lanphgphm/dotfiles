@@ -5,7 +5,7 @@ return {
     ft = "go",
     opts = {
       auto_format = true,
-      auto_lint = true,
+      auto_lint = false,
       maintain_cursor = true,
       formatter = "goimports", -- Adds missing imports + formats on save
     },

@@ -22,17 +22,9 @@ return {
             capabilities = capabilities, 
         }
 
-        vim.lsp.config.rust_analyzer = {
-            capabilities = capabilities,
-            settings = {
-                ["rust-analyzer"] = { 
-                    cargo = { allFeatures = true }, 
-                    procMacro = { enable = true },
-                }
-            }
-        }
+        -- rust_analyzer is managed by rustaceanvim plugin
 
         -- Enable the relevant server when open a file
-        vim.lsp.enable({ "gopls", "clangd", "rust_analyzer" })
+        vim.lsp.enable({ "gopls", "clangd" })
     end
 }
