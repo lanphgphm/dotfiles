@@ -168,6 +168,13 @@
     signal-desktop
     opencode
     wireshark
+    dnsutils
+    bison 
+    flex 
+
+    # c/c++
+    clang-tools
+    bear
 
     # kubernetes 
     kubectl 
