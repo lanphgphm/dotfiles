@@ -7,9 +7,9 @@
     <value type="int" value="2"/>
     <property name="dark-mode" type="bool" value="true"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=6;x=0;y=0"/>
+      <property name="position" type="string" value="p=6;x=960;y=14"/>
       <property name="length" type="uint" value="100"/>
-      <property name="position-locked" type="bool" value="true"/>
+      <property name="position-locked" type="bool" value="false"/>
       <property name="icon-size" type="uint" value="16"/>
       <property name="size" type="uint" value="27"/>
       <property name="plugin-ids" type="array">
@@ -67,6 +67,7 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “lfong-coldspot” active: lfong-coldspot (95%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (70%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (90%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (87%)"/>
