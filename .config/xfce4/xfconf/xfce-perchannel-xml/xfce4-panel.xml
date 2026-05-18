@@ -67,6 +67,7 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (84%)"/>
         <value type="string" value="wi-fi network connection “lfong-coldspot” active: lfong-coldspot (95%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (70%)"/>
         <value type="string" value="wi-fi network connection “timebeat.app vn_5g” active: timebeat.app vn_5g (90%)"/>
