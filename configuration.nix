@@ -122,6 +122,11 @@
     };
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
+
   # enable filesystem compatibility layer 
   #programs.nix-ld = {
   #  enable = true; 
