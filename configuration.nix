@@ -172,6 +172,9 @@
     bison 
     flex 
 
+    # python 
+    python3 
+
     # c/c++
     clang-tools
     bear
