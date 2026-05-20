@@ -11,7 +11,7 @@ sudo cp "$DOTFILES_DIR/configuration.nix" /etc/nixos/configuration.nix
 configs=(
     "kitty"
     "nvim"
-    "xfce4"
+    #"xfce4"
     "opencode/opencode.json"
 )
 
