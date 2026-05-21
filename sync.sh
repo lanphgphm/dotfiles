@@ -1,3 +1,4 @@
+MACHINE=$1
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # standalone config files
@@ -5,7 +6,7 @@ cp ~/.zshrc "$DOTFILES_DIR/.zshrc"          # zsh runcommands
 cp ~/.gitconfig "$DOTFILES_DIR/.gitconfig"  # global git config
 
 # Sync NixOS configuration
-sudo cp /etc/nixos/configuration.nix "$DOTFILES_DIR/configuration.nix"
+sudo cp /etc/nixos/configuration.nix "$DOTFILES_DIR/$MACHINE-configuration.nix"
 
 # Sync .config directories
 configs=(
