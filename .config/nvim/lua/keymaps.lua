@@ -34,3 +34,6 @@ end, { desc = "Go to Definition in Vertical Split" })
 map("n", "<leader>q", "<C-w>c", { desc = "Close current window/split" })
 
 vim.keymap.set('n', '<S-e>', vim.diagnostic.open_float)
+
+-- C/C++: Switch between header and source (clangd)
+map("n", "gh", "<cmd>ClangdSwitchSourceHeader<cr>", { desc = "Switch Header/Source" })

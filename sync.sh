@@ -6,14 +6,12 @@ cp ~/.zshrc "$DOTFILES_DIR/.zshrc"          # zsh runcommands
 cp ~/.gitconfig "$DOTFILES_DIR/.gitconfig"  # global git config
 
 # Sync NixOS configuration
-sudo cp /etc/nixos/configuration.nix "$DOTFILES_DIR/$MACHINE-configuration.nix"
+sudo cp /etc/nixos/configuration.nix "$DOTFILES_DIR/configuration.nix"
 
 # Sync .config directories
 configs=(
     "kitty"
     "nvim"
-    #"xfce4"
-    "opencode/opencode.json"
 )
 
 for config in "${configs[@]}"; do

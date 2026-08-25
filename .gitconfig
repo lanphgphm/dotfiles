@@ -54,3 +54,9 @@
         conflictstyle = zdiff3
 [pull]
         # rebase = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/nix/store/zmby710xkfnzpq1wq3zxgp044724zwwb-gh-2.96.0/bin/.gh-wrapped auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/nix/store/zmby710xkfnzpq1wq3zxgp044724zwwb-gh-2.96.0/bin/.gh-wrapped auth git-credential

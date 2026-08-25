@@ -5,7 +5,7 @@ cp "$DOTFILES_DIR/.zshrc" ~/.zshrc              # zsh runcommands
 cp "$DOTFILES_DIR/.gitconfig" ~/.gitconfig      # global git config
 
 # Apply NixOS configuration
-# sudo cp "$DOTFILES_DIR/configuration.nix" /etc/nixos/configuration.nix
+sudo cp "$DOTFILES_DIR/configuration.nix" /etc/nixos/configuration.nix
 
 # Apply .config directories
 configs=(

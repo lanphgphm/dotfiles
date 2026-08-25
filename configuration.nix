@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  unstable = import <nixos-unstable> { config.allowUnfree = true; };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -17,29 +19,20 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
   networking.networkmanager.enable = true;
 
   # Set your time zone.
+  #time.timeZone = "Europe/London";
   time.timeZone = "Asia/Ho_Chi_Minh";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "vi_VN";
-    LC_IDENTIFICATION = "vi_VN";
-    LC_MEASUREMENT = "vi_VN";
-    LC_MONETARY = "vi_VN";
-    LC_NAME = "vi_VN";
-    LC_NUMERIC = "vi_VN";
-    LC_PAPER = "vi_VN";
-    LC_TELEPHONE = "vi_VN";
-    LC_TIME = "vi_VN";
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = [ pkgs.qt6Packages.fcitx5-unikey ];
   };
 
   # Enable the X11 windowing system.
@@ -59,7 +52,7 @@
   services.printing.enable = true;
 
   # [Experimental] chronyd for time sync 
-  services.timesyncd.enable = false; 
+  services.timesyncd.enable = true; 
   services.chrony.enable = true; 
 
   # Enable sound with pipewire.
@@ -76,6 +69,16 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+  };
+
+  systemd.services.warp-svc = {
+    description = "Cloudflare WARP daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.cloudflare-warp}/bin/warp-svc";
+      Restart = "on-failure";
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -122,35 +125,15 @@
     };
   };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-  };
-
-  # enable filesystem compatibility layer 
-  #programs.nix-ld = {
-  #  enable = true; 
-  #  libraries = with pkgs; [
-  #    stdenv.cc.cc.lib
-  #    zlib
-  #    glib
-  #    libGL
-  #    xorg.libX11
-  #    xorg.libXext
-  #    xorg.libXrender
-  #    xorg.libXtst
-  #    xorg.libXi
-  #    freetype
-  #    fontconfig
-  #    libxcrypt
-  #    ncurses5
-  #    libuuid
-  #  ];
-  #}; 
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings = {
     download-buffer-size = 524288000; # 500 MiB
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = [
+      "https://cache.nixos.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -158,24 +141,51 @@
   environment.systemPackages = with pkgs; [ 
     kitty
     brave
+    unstable.signal-desktop
     xclip
     lsof 
-    tcpdump
-    netcat
     unzip
     jq 
     yq 
-    tailscale
-    gcc
-    gnumake
     fzf
     ripgrep
-    signal-desktop
     opencode
-    wireshark
-    dnsutils
+    bc
+    m4
+    texinfo
+    kustomize
+
+    # compilers
+    gcc
+    gnumake
     bison 
     flex 
+
+    # network 
+    nmap 
+    arp-scan
+    tshark
+    openssl
+    nettools 
+    wireshark
+    dnsutils
+    tcpdump
+    netcat
+    ethtool
+
+    # vpn 
+    cloudflare-warp
+    tailscale
+
+    # serial 
+    picocom
+    minicom
+    usbutils 
+
+    # agent-supports
+    sshpass
+    poppler-utils
+    bat
 
     # python 
     python3 
@@ -190,6 +200,7 @@
       google-cloud-sdk.components.gke-gcloud-auth-plugin
     ])
     k9s
+    oci-cli
 
     # original sin 
     nodejs 
@@ -205,8 +216,6 @@
     # unfree software 
     slack
     claude-code
-    # a bunch of jetbrains 
-    jetbrains.idea
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -231,7 +240,10 @@
   # };
 
   # List services that you want to enable:
-  virtualisation.docker.enable = true; 
+  virtualisation.docker = {
+    enable = true;
+    package = pkgs.docker_29;
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
