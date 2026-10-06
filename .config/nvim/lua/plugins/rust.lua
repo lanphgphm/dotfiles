@@ -27,7 +27,8 @@ return {
             ["rust-analyzer"] = {
               cargo = { allFeatures = true },
               procMacro = { enable = true },
-              checkOnSave = { command = "clippy" },
+              checkOnSave = true,
+              check = { command = "clippy" },
               inlayHints = {
                 chainingHints = { enable = true },
                 typeHints = { enable = true },

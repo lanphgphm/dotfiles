@@ -27,6 +27,10 @@ return {
                 "--header-insertion=iwyu",
                 "--completion-style=detailed",
                 "--function-arg-placeholders=true",
+                -- Let clangd query the cross-compiler for system-header
+                -- and builtin paths. Broad pattern covers nixpkgs
+                -- riscv32-none-elf toolchain plus common gcc cross-tools.
+                "--query-driver=/nix/store/*/bin/riscv32-*-gcc,/nix/store/*/bin/*-elf-gcc,/usr/bin/*-elf-gcc",
             },
         }
 

@@ -14,6 +14,11 @@ compinit
 # End of lines added by compinstall
 export KNOWLEDGE_VAULT_PATH="$HOME/self/zettelkasten/"
 export PATH="$PATH:$HOME/.cargo/bin"
+
+# format man pages
+export GROFF_NO_SGR=1
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 alias tosrc="cd $HOME/src/timebeat && nvim ."
 alias tosrconly="cd $HOME/src/timebeat"
 alias tonotes="cd $HOME/me/zettelkasten/ && nvim ."
@@ -29,8 +34,7 @@ alias clearblanks="sed -i 's/[[:space:]]*$//' "
 alias torvsim="cd $HOME/src/wr/riscv-gnu-toolchain"
 alias totest="cd $HOME/src/hitl-tests/ && nvim ."
 alias toatf="cd $HOME/artifacts/"
-alias tohelp="cd $HOME/artifacts/help/"
-alias toserial="cd $HOME/artifacts/help/serial-console/"
+alias towork="ssh lfong@100.91.155.7"
 
 portfwd() {
     ssh -L 65129:localhost:65129 root@"$1"
@@ -94,10 +98,11 @@ cfgcp() {
 
 cpsshkey() {
       local host="$1"
-      local pw="1234"
+      local user="${2:-root}"
+      local pw="${3:-1234}"
 
       if [[ -z "$host" ]]; then
-          echo "Usage: cpsshkey <host> [password]"
+          echo "Usage: cpsshkey <host> [user] [password]"
           return 1
       fi
 
@@ -109,13 +114,13 @@ cpsshkey() {
       sshpass -p "$pw" ssh-copy-id \
           -i "$HOME/.ssh/agent_key.pub" \
           -o StrictHostKeyChecking=accept-new \
-          "root@${host}"
+          "$user@${host}"
       
       # Verify passwordless key auth actually works. Fabric needs BatchMode-clean.
       ssh -i "$HOME/.ssh/agent_key" \
           -o BatchMode=yes \
           -o StrictHostKeyChecking=accept-new \
-          "root@${host}" hostname \
+          "$user@${host}" hostname \
           && echo "cpsshkey: OK — passwordless auth to $host is live" \
           || { echo "cpsshkey: FAILED verify — key present on remote but auth still refuses"; return 1; }
   }

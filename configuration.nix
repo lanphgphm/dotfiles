@@ -95,6 +95,13 @@ in
     ];
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;              # Steam Remote Play
+    dedicatedServer.openFirewall = true;         # Source dedicated servers
+    localNetworkGameTransfers.openFirewall = true;
+  };
+
   # Enable zsh & omz 
   programs.zsh = {
     enable = true;
@@ -123,6 +130,10 @@ in
       };
       init.defaultBranch = "main";
     };
+  };
+
+  programs.nix-ld = {
+    enable = true; 
   };
 
   nix.settings = {
@@ -154,6 +165,8 @@ in
     m4
     texinfo
     kustomize
+    fd
+    sshfs
 
     # compilers
     gcc
@@ -167,7 +180,6 @@ in
     tshark
     openssl
     nettools 
-    wireshark
     dnsutils
     tcpdump
     netcat
